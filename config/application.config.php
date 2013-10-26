@@ -6,7 +6,8 @@ return array(
         'DoctrineModule',
         'DoctrineORMModule',
         'ZfcBase',
-        'ZfcUser'
+        'ZfcUser',
+        'BjyAuthorize'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
