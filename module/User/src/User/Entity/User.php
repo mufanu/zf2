@@ -19,7 +19,7 @@ use ZfcUser\Entity\UserInterface;
  * @ORM\Entity
  * @ORM\Table(name="users")
  *
- * @author Tom Oram <tom@scl.co.uk>
+ * @author Fail Mukhametdinov <mufanu@gmail.com>
  */
 class User implements UserInterface, ProviderInterface
 {
@@ -57,8 +57,21 @@ class User implements UserInterface, ProviderInterface
 
     /**
      * @var int
+     * @ORM\Column(type="integer")
      */
     protected $state;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $created;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $access;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -208,6 +221,30 @@ class User implements UserInterface, ProviderInterface
     public function setState($state)
     {
         $this->state = $state;
+    }
+
+    /**
+     * Set created
+     *
+     * @param int $created
+     *
+     * @return void
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * Set access
+     *
+     * @param int $access
+     *
+     * @return void
+     */
+    public function setAccess($access)
+    {
+        $this->access = $access;
     }
 
     /**

@@ -25,4 +25,17 @@ class Module
     {
         return include __DIR__ . '/config/module.config.php';
     }
+
+    /**
+     * Расширение формы регистрации
+     * @param Event $e
+     */
+    public function onBootstrap($e)
+    {
+        $zfcServiceEvents = $e->getApplication()->getServiceManager()->get('zfcuser_user_service')->getEventManager();
+        $zfcServiceEvents->attach('register', function($e) {
+            $user = $e->getParam('user');  // User account object
+            $user->setCreated(time());
+        });
+    }
 }
