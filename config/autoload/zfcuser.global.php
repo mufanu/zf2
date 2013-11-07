@@ -21,7 +21,7 @@ $settings = array(
      * instead of the default one provided. Default is ZfcUser\Entity\User.
      * The entity class should implement ZfcUser\Entity\UserInterface
      */
-    //'user_entity_class' => 'ZfcUser\Entity\User',
+    'user_entity_class' => 'User\Entity\User',
 
     /**
      * Enable registration
@@ -109,7 +109,7 @@ $settings = array(
      * Determines if a captcha should be utilized on the user registration form.
      * Default value is false.
      */
-    //'use_registration_form_captcha' => false,
+    //'use_registration_form_captcha' => true,
 
     /**
      * Form Captcha Options
@@ -193,7 +193,7 @@ $settings = array(
      *
      * Should user's state be used in the registration/login process?
      */
-    //'enable_user_state' => true,
+    'enable_user_state' => true,
 
     /**
      * Default user state upon registration
@@ -201,7 +201,7 @@ $settings = array(
      * What state user should have upon registration?
      * Allowed value type: integer
      */
-    //'default_user_state' => 1,
+    'default_user_state' => 1,
 
     /**
      * States which are allowing user to login
@@ -210,7 +210,7 @@ $settings = array(
      * Include null if you want user's with no state to login as well.
      * Allowed value types: null and integer
      */
-    //'allowed_login_states' => array( null, 1 ),
+    'allowed_login_states' => array( null, 1 ),
 
     /**
      * User table name
