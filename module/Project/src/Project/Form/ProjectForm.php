@@ -11,7 +11,6 @@ namespace Project\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
-use Project\Form\ProjectInputFilter;
 
 class ProjectForm extends Form
 {
@@ -19,11 +18,7 @@ class ProjectForm extends Form
     {
         parent::__construct('project');
         $this->setAttribute('method', 'post');
-        $this->setInputFilter(new ProjectInputFilter());
-        $this->add(array(
-            'name' => 'security',
-            'type' => 'Zend\Form\Element\Csrf',
-        ));
+        //$this->setInputFilter(new ProjectInputFilter());
         $this->add(array(
             'name' => 'id',
             'type' => 'Hidden',
