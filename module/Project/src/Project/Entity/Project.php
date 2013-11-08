@@ -62,6 +62,28 @@ class Project
     protected $state;
 
     /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set id.
+     *
+     * @param int $id
+     *
+     * @return void
+     */
+    public function setId($id)
+    {
+        $this->id = (int)$id;
+    }
+
+    /**
      * Get title.
      *
      * @return string
@@ -169,5 +191,25 @@ class Project
     public function setState($state)
     {
         $this->state = $state;
+    }
+
+    /**
+     * Helper function.
+     */
+    public function exchangeArray($data)
+    {
+        foreach ($data as $key => $val) {
+            if (property_exists($this, $key)) {
+                $this->$key = ($val !== null) ? $val : null;
+            }
+        }
+    }
+
+    /**
+     * Helper function
+     */
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
     }
 }
