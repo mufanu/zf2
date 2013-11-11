@@ -1,0 +1,14 @@
+{% extends 'layout/layout.twig' %}
+
+{% block content %}
+    <ul>
+    {% for project in projects %}
+        <li>
+            <a href="{{ url('project', {'action': 'view', 'id': project.id}) }}">{{ project.title }}</a>
+            [{{ project.created|date('d.m.Y H:i') }}]
+            <a href="{{ url('project', {'action': 'edit', 'id': project.id}) }}">edit</a>,
+            <a href="{{ url('project', {'action': 'delete', 'id': project.id}) }}">delete</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock content %}
