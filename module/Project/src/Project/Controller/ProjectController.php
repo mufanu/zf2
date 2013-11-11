@@ -13,7 +13,17 @@ class ProjectController extends AbstractActionController
 
     public function indexAction()
     {
-        return new ViewModel();
+        $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+
+        $projects = $objectManager
+            ->getRepository('Project\Entity\Project')
+            ->findBy(array('state' => 1), array('created' => 'DESC'));
+
+        $view = new ViewModel(array(
+            'projects' => $projects
+        ));
+
+        return $view;
     }
 
     public function addAction()
