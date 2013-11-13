@@ -268,4 +268,18 @@ class User implements UserInterface, ProviderInterface
     {
         $this->roles[] = $role;
     }
+
+    /**
+     * Helper function.
+     */
+    public function exchangeArray($data)
+    {
+        foreach ($data as $key => $val) {
+            if (property_exists($this, $key)) {
+                if ($val !== null) {
+                    $this->$key = $val;
+                }
+            }
+        }
+    }
 }

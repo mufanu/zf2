@@ -42,6 +42,31 @@ return array(
         ),
     ),
 
+    'controllers' => array(
+        'invokables' => array(
+            'user' => 'User\Controller\UserController',
+        )
+    ),
+
+    'router' => array(
+        'routes' => array(
+            'zfcuser' => array(
+                'child_routes' => array(
+                    'edit' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/edit',
+                            'defaults' => array(
+                                'controller' => 'user',
+                                'action'     => 'edit',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        )
+    ),
+
     'view_manager' => array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
