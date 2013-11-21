@@ -8,7 +8,10 @@
  
 namespace User\Entity;
 
+use BjyAuthorize\Provider\Role\ProviderInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use ZfcUser\Entity\UserInterface;
 
 /**
  * An example of how to implement a role aware user entity.
@@ -18,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author Fail Mukhametdinov <mufanu@gmail.com>
  */
-class User
+class User implements UserInterface, ProviderInterface
 {
     /**
      * @var int
@@ -30,9 +33,33 @@ class User
 
     /**
      * @var string
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     */
+    protected $username;
+
+    /**
+     * @var string
      * @ORM\Column(type="string", unique=true,  length=255)
      */
     protected $email;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    protected $displayName;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    protected $telephone;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    protected $site;
 
     /**
      * @var string
@@ -60,15 +87,27 @@ class User
 
     /**
      * @var int
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
-    protected $master;
+    protected $profile;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer", nullable=true)
+     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\ManyToMany(targetEntity="User\Entity\Role")
+     * @ORM\JoinTable(name="user_role_linker",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     * )
      */
-    protected $company;
+    protected $roles;
+
+    /**
+     * Initialies the roles variable.
+     */
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -93,6 +132,28 @@ class User
     }
 
     /**
+     * Get username.
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set username.
+     *
+     * @param string $username
+     *
+     * @return void
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
      * Get email.
      *
      * @return string
@@ -112,6 +173,72 @@ class User
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * Get displayName.
+     *
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return $this->displayName;
+    }
+
+    /**
+     * Set displayName.
+     *
+     * @param string $displayName
+     *
+     * @return void
+     */
+    public function setDisplayName($displayName)
+    {
+        $this->displayName = $displayName;
+    }
+
+    /**
+     * Get telephone.
+     *
+     * @return string
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * Set telephone.
+     *
+     * @param string $telephone
+     *
+     * @return void
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+    }
+
+    /**
+     * Get site.
+     *
+     * @return string
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    /**
+     * Set site.
+     *
+     * @param string $site
+     *
+     * @return void
+     */
+    public function setSite($site)
+    {
+        $this->site = $site;
     }
 
     /**
@@ -186,24 +313,36 @@ class User
      * @TODO - Add comments.
      * @return int
      */
-    public function getMaster()
+    public function getProfile()
     {
-        return $this->master;
+        return $this->profile;
     }
 
-    public function setMaster($master)
+    public function setProfile($profile)
     {
-        $this->master = $master;
+        $this->profile = $profile;
     }
 
-    public function getCompany()
+    /**
+     * Get role.
+     *
+     * @return array
+     */
+    public function getRoles()
     {
-        return $this->company;
+        return $this->roles->getValues();
     }
 
-    public function setCompany($company)
+    /**
+     * Add a role to the user.
+     *
+     * @param Role $role
+     *
+     * @return void
+     */
+    public function addRole($role)
     {
-        $this->company = $company;
+        $this->roles[] = $role;
     }
 
     /**

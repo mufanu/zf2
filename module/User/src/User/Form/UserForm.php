@@ -9,27 +9,28 @@
 namespace User\Form;
 
 use Zend\Form\Form;
+use Zend\Form\Element;
 
 class UserForm extends Form
 {
-    public function __construct($name = null)
+    public function __construct($name = null, $options = array())
     {
-        parent::__construct('userEdit');
-        //$this->setAttribute('action', '');
-        $this->setAttribute('method', 'post');
+        parent::__construct('useredit', $options);
+        $this->setAttribute('action', 'edit');
+        $this->addElements();
+    }
+
+    public function addElements() {
+
+        $submit = new Element\Submit('submit');
+        $submit->setValue('Save');
+
         $this->add(array(
-            'name' => 'displayName',
-            'type' => 'text',
+            'type' => 'User\Form\UserFieldset',
             'options' => array(
-                'label' => 'Name',
-            ),
+                'use_as_base_fieldset' => true
+            )
         ));
-        $this->add(array(
-            'name' => 'submit',
-            'attributes' => array(
-                'type' => 'submit',
-                'value' => 'Save',
-            ),
-        ));
+        $this->add($submit);
     }
 }

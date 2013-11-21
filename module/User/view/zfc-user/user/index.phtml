@@ -1,7 +1,12 @@
-<div style="float:left; padding-right:16px;">
-    <?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?>
+<div class="profile">
+    <div style="float:left; padding-right:16px;">
+        <img src="<?php echo $this->basePath() . '/img/avatar.jpeg' ?>"/>
+    </div>
+    <h3><?php //echo $this->zfcUserDisplayName() ?></h3>
+    <div><?php //echo $this->zfcUserIdentity()->getTelephone() ?></div>
+    <div><?php //echo $this->zfcUserIdentity()->getSite() ?></div>
+    <a href="<?php echo $this->url('zfcuser/edit'); ?>">[Edit]</a>
+    <a href="<?php echo $this->url('zfcuser/logout') ?>">[Sign Out]</a>
+    <div style="clear:both;"></div>
 </div>
-<h3>Hello, <?php echo $this->zfcUserDisplayName() ?>!</h3>
-<a href="<?php echo $this->url('zfcuser/edit'); ?>">[Edit]</a>
-<a href="<?php echo $this->url('zfcuser/logout') ?>">[Sign Out]</a>
-<div style="clear:both;"></div>
+

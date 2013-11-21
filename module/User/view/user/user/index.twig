@@ -1,0 +1,11 @@
+{% extends 'layout/layout.twig' %}
+
+{% block content %}
+    <h1>Зарегистрироваться</h1>
+
+    <div>Выберите кем вы хотите зарегистрироваться</div>
+    <ul>
+        <li><a href="{{ url('user/master', {'action': 'master'}) }}">Частный мастер</a></li>
+        <li><a href="{{ url('user/company', {'action': 'master'}) }}">Организация</a></li>
+    </ul>
+{% endblock content %}

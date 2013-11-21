@@ -8,6 +8,8 @@
 
 namespace User;
 
+use User\Entity\Master;
+
 class Module
 {
     public function getAutoloaderConfig()
@@ -36,6 +38,7 @@ class Module
         $zfcServiceEvents->attach('register', function($e) {
             $user = $e->getParam('user');  // User account object
             $user->setCreated(time());
+            $master = new Master();
         });
     }
 }

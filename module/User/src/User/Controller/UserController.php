@@ -2,14 +2,26 @@
 
 namespace User\Controller;
 
-use User\Entity\User;
-use User\Form\UserForm;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Stdlib\Hydrator\Reflection;
 use Zend\View\Model\ViewModel;
 
 class UserController extends AbstractActionController
 {
+
+    public function indexAction()
+    {
+        return new ViewModel();
+    }
+
+    public function masterAction()
+    {
+        return new ViewModel();
+    }
+
+    public function companyAction()
+    {
+        return new ViewModel();
+    }
 
     public function editAction()
     {
@@ -30,38 +42,49 @@ class UserController extends AbstractActionController
 
         if ($request->isPost()) {
 
-            $form->setData($request->getPost());
+            $post = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+
+            $form->setData($post);
+            /*
+            echo "<pre>";
+            var_dump($post);
+            echo "</pre>";
+            */
 
             if ($form->isValid()) {
 
+                $adapter = new \Zend\File\Transfer\Adapter\Http();
+
+                $userdir = $user->getUserdir();
+
+                $adapter->setDestination($userdir);
+
+                $file = $this->params()->fromFiles('avatar');
+
+                //var_dump($File);
+
+                $adapter->receive($file['name']);
+
                 $data = $form->getData();
 
-                echo "<pre>";
-                //var_dump($data);
-                echo "</pre>";
-
                 $user->exchangeArray($data);
-
-                echo "<pre>";
-                //var_dump($user);
-                echo "</pre>";
-
-
-
 
                 $objectManager->persist($user);
                 $objectManager->flush();
 
-                // Redirect to list of blogposts
+                // Redirect to user page
                 return $this->redirect()->toRoute('zfcuser');
             }
 
         } else {
             $form->bind($user);
             return array('form' => $form);
+
         }
     }
-
 
 }
 
