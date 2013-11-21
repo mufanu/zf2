@@ -1,0 +1,18 @@
+{% extends 'layout/layout-left-sidebar.twig' %}
+
+{% block content %}
+    <div class="left-sidebar">
+        <h3>Личный кабинет</h3>
+        <ul>
+            <li>Профиль</li>
+            <li>Настройка</li>
+            <li><a href="{{ url('zfcuser/logout') }}">Выйти</a></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <div class="section">
+            Информация
+        </div>
+    </div>
+{% endblock content %}

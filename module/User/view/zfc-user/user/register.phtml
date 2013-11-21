@@ -1,0 +1,22 @@
+<h1>Регистрация</h1>
+
+<?php
+if (!$this->enableRegistration) {
+    print "Registration is disabled";
+    return;
+}
+$form = $this->registerForm;
+$form->prepare();
+$form->setAttribute('action', $this->url('zfcuser/register'));
+$form->setAttribute('method', 'post');
+echo $this->form()->openTag($form); ?>
+<div class=""><?php echo $this->formRow($form->get('profile')); ?></div>
+<div><?php echo $this->formRow($form->get('email')); ?></div>
+<div><?php echo $this->formRow($form->get('password')); ?></div>
+<div><?php echo $this->formRow($form->get('passwordVerify')); ?></div>
+<div><?php echo $this->formRow($form->get('submit')); ?></div>
+
+<?php
+echo $this->form()->closeTag();
+
+

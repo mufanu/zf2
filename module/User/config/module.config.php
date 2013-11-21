@@ -64,40 +64,6 @@ return array(
                     ),
                 ),
             ),
-
-            'user' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/register',
-                    'defaults' => array(
-                        'controller' => 'user',
-                        'action' => 'index',
-                    )
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'master' => array(
-                        'type' => 'Literal',
-                        'options' => array(
-                            'route' => '/master',
-                            'defaults' => array(
-                                'controller' => 'user',
-                                'action' => 'master',
-                            )
-                        )
-                    ),
-                    'company' => array(
-                        'type' => 'Literal',
-                        'options' => array(
-                            'route' => '/company',
-                            'defaults' => array(
-                                'controller' => 'user',
-                                'action' => 'company',
-                            )
-                        )
-                    ),
-                ),
-            ),
         )
     ),
 

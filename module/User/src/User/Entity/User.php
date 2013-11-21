@@ -9,6 +9,7 @@
 namespace User\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ZfcUser\Entity\UserInterface;
 
 /**
  * An example of how to implement a role aware user entity.
@@ -18,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author Fail Mukhametdinov <mufanu@gmail.com>
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
@@ -30,9 +31,33 @@ class User
 
     /**
      * @var string
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     */
+    protected $username;
+
+    /**
+     * @var string
      * @ORM\Column(type="string", unique=true,  length=255)
      */
     protected $email;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    protected $displayName;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    protected $telephone;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    protected $site;
 
     /**
      * @var string
@@ -93,6 +118,28 @@ class User
     }
 
     /**
+     * Get username.
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set username.
+     *
+     * @param string $username
+     *
+     * @return void
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
      * Get email.
      *
      * @return string
@@ -112,6 +159,72 @@ class User
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * Get displayName.
+     *
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return $this->displayName;
+    }
+
+    /**
+     * Set displayName.
+     *
+     * @param string $displayName
+     *
+     * @return void
+     */
+    public function setDisplayName($displayName)
+    {
+        $this->displayName = $displayName;
+    }
+
+    /**
+     * Get telephone.
+     *
+     * @return string
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * Set telephone.
+     *
+     * @param string $telephone
+     *
+     * @return void
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+    }
+
+    /**
+     * Get site.
+     *
+     * @return string
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    /**
+     * Set site.
+     *
+     * @param string $site
+     *
+     * @return void
+     */
+    public function setSite($site)
+    {
+        $this->site = $site;
     }
 
     /**
@@ -183,6 +296,15 @@ class User
     }
 
     /**
+     * @TODO - Реализовать создание профиля.
+     * @return int
+     */
+    public function createMaster()
+    {
+        return rand(1,100);
+    }
+
+    /**
      * @TODO - Add comments.
      * @return int
      */
@@ -191,9 +313,14 @@ class User
         return $this->master;
     }
 
-    public function setMaster($master)
+    public function setMaster($profile)
     {
-        $this->master = $master;
+        $this->master = $profile;
+    }
+
+    public function createCompany()
+    {
+        return rand(1,100);
     }
 
     public function getCompany()

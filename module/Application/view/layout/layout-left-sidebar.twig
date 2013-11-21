@@ -22,7 +22,7 @@
     <script type="text/javascript" src="/js/html5.js"></script><![endif]-->
     {% block script %}{% endblock script %}
 </head>
-<body>
+<body class="with-left-sidebar">
 
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
@@ -41,7 +41,7 @@
                             <a href="{{ url('zfcuser', {'action': 'login'}) }}">{{ translate('Login') }}</a>
                         </li>
                         <li class="active">
-                            <a href="{{ url('zfcuser/register', {'action': 'index'}) }}">{{ translate('Register') }}</a>
+                            <a href="{{ url('user', {'action': 'index'}) }}">{{ translate('Register') }}</a>
                         </li>
                     {% endif %}
                 </ul>

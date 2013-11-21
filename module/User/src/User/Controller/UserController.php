@@ -2,20 +2,26 @@
 
 namespace User\Controller;
 
+use Zend\Form\Form;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\Stdlib\Parameters;
 use Zend\View\Model\ViewModel;
+use User\Entity\User;
 
 class UserController extends AbstractActionController
 {
-
     public function indexAction()
     {
         return new ViewModel();
     }
 
-    public function masterAction()
+    /**
+     * Register new user
+     */
+    public function registerAction()
     {
-        return new ViewModel();
+
     }
 
     public function companyAction()
